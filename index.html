@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qolby Quran - Private Mengaji</title>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Config for Custom Colors/Fonts -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Custom CSS for specific behaviors -->
+    <style>
+        .faq-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease-in-out;
+            opacity: 0;
+        }
+        .faq-content.open {
+            max-height: 300px;
+            opacity: 1;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            border-top: 1px solid #f1f5f9;
+        }
+        
+        /* Smooth transitions for mobile menu */
+        #mobile-menu {
+            transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            display: flex;
+        }
+        #mobile-menu.open {
+            max-height: 400px;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 font-sans text-slate-800 selection:bg-emerald-200 selection:text-emerald-900 overflow-x-hidden min-h-screen">
+
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-transparent py-5">
+        <div class="container mx-auto px-6 md:px-12 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhmQNbqqIFjOYD5MXIjWljwfWxLQKYCYG9eWMKXiRJbdkFJluv5Txu3sdfHYZ-qXlZ1Flu6ci0cqtPv7v7FxJJotFuP8wF_C43zZxLdzVp3nqEHh18ApNBMkMSlaI9r7TVK0KWEMiDuvYiFYffd61Mjf-fM2VbVKQG8mnuAXsYJOogen6eEvs06HDFGyZI/s1391/WhatsApp%20Image%202026-06-22%20at%2014.22.16.jpeg" alt="Qolby Quran Logo" class="h-14 rounded-lg object-contain" />
+                <div class="flex flex-col justify-center">
+                    <span class="text-xl md:text-2xl font-extrabold text-emerald-800 leading-none">Qolby Quran</span>
+                    <span class="text-[10px] md:text-xs font-bold tracking-widest text-amber-500 uppercase mt-1">Mengaji</span>
+                </div>
+            </div>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center gap-8 font-medium text-slate-600">
+                <a href="#beranda" class="hover:text-emerald-600 transition-colors">Beranda</a>
+                <a href="#program" class="hover:text-emerald-600 transition-colors">Program</a>
+                <a href="#keunggulan" class="hover:text-emerald-600 transition-colors">Keunggulan</a>
+                <a href="#testimoni" class="hover:text-emerald-600 transition-colors">Testimoni</a>
+                <a href="#kontak" class="px-6 py-2.5 bg-amber-400 hover:bg-amber-500 text-amber-950 rounded-full font-semibold transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5">Daftar Sekarang</a>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button id="mobile-menu-btn" class="md:hidden text-slate-800 focus:outline-none">
+                <i data-lucide="menu" id="menu-icon" class="w-7 h-7"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="md:hidden absolute top-full left-0 w-full bg-white shadow-xl px-6 flex-col gap-4 font-medium border-t">
+            <div class="py-4 flex flex-col gap-4 w-full">
+                <a href="#beranda" class="mobile-link text-slate-600 py-2 border-b border-slate-100">Beranda</a>
+                <a href="#program" class="mobile-link text-slate-600 py-2 border-b border-slate-100">Program</a>
+                <a href="#keunggulan" class="mobile-link text-slate-600 py-2 border-b border-slate-100">Keunggulan</a>
+                <a href="#testimoni" class="mobile-link text-slate-600 py-2 border-b border-slate-100">Testimoni</a>
+                <a href="#kontak" class="mobile-link mt-2 text-center px-6 py-3 bg-amber-400 text-amber-950 rounded-full font-semibold">Daftar Sekarang</a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="beranda" class="pt-32 pb-20 md:pt-40 md:pb-28 bg-gradient-to-b from-sky-50 to-white overflow-hidden">
+        <div class="container mx-auto px-6 md:px-12 flex flex-col-reverse md:flex-row items-center gap-12">
+            <div class="flex-1 text-center md:text-left z-10">
+                <div class="inline-block px-4 py-1.5 bg-sky-100 text-sky-700 font-medium rounded-full text-sm mb-6 border border-sky-200">
+                    ✨ Belajar Al-Qur'an dengan Mudah, Nyaman, dan Menyenangkan.
+                </div>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-800 leading-tight mb-6">
+                    Private Mengaji untuk <span class="text-emerald-600 relative inline-block">
+                        Anak, Remaja & Dewasa
+                        <svg class="absolute w-full h-3 -bottom-1 left-0 text-amber-300 -z-10" viewBox="0 0 100 10" preserveAspectRatio="none">
+                            <path d="M0 5 Q 50 10 100 5" stroke="currentColor" stroke-width="8" fill="transparent" stroke-linecap="round"/>
+                        </svg>
+                    </span>
+                </h1>
+                <p class="text-lg md:text-xl text-slate-600 mb-8 max-w-2xl mx-auto md:mx-0">
+                    Program belajar Al-Qur'an dari dasar hingga mahir dengan metode yang mudah dipahami, ramah anak, dan disesuaikan dengan kebutuhan Anda.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center gap-4 justify-center md:justify-start">
+                    <a href="#kontak" class="w-full sm:w-auto px-8 py-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-full font-semibold transition-all shadow-lg shadow-emerald-200 flex items-center justify-center gap-2 transform hover:-translate-y-1">
+                        Daftar Sekarang
+                    </a>
+                    <a href="https://wa.me/qr/4RUWVO4IFCOEE1" target="_blank" rel="noreferrer" class="w-full sm:w-auto px-8 py-4 bg-white border-2 border-emerald-100 hover:border-emerald-300 text-emerald-700 rounded-full font-semibold transition-all flex items-center justify-center gap-2">
+                        <i data-lucide="phone" class="w-5 h-5"></i> Konsultasi Gratis
+                    </a>
+                </div>
+            </div>
+            
+            <div class="flex-1 relative w-full">
+                <!-- Decorative background blob -->
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 md:w-96 md:h-96 bg-amber-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-pulse"></div>
+                <div class="absolute top-1/2 left-1/4 -translate-y-1/2 w-72 h-72 bg-sky-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50"></div>
+                
+                <!-- Hero Illustration dengan Efek 3D -->
+                <div style="perspective: 1200px;" class="relative z-10 w-full max-w-lg mx-auto aspect-square">
+                    <div id="hero-3d" 
+                        class="relative w-full h-full bg-gradient-to-tr from-emerald-100 to-sky-50 rounded-[3rem] shadow-2xl border-8 border-white flex items-center justify-center overflow-hidden cursor-grab"
+                        style="transform-style: preserve-3d; transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
+                        
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiE7oLJxdTUYJRL0s0KKhfNhf9T3Tv_J-XuKx-D36nux7VDU3WQyF1CpzdCSmq19AHZ9dJQVq8efvxep7teeAONrkfQO_lkic-2zM5Lw3LgfbmOmzcJw9pLq3McHqcMGC0iWEym4Q0oF8lgvKVGWmYgLM6uKex3uGvULb8nIbzKjo3o4vPYKLQPhSzqxrc/s1280/WhatsApp%20Image%202026-06-22%20at%2014.04.55.jpeg"
+                             alt="Ilustrasi Guru & Santri Mengaji" 
+                             class="w-full h-full object-cover select-none pointer-events-none"
+                             draggable="false" />
+                        
+                        <div class="absolute inset-0 bg-emerald-900/10 pointer-events-none"></div>
+                        
+                        <!-- Hint/Petunjuk Interaksi -->
+                        <div id="hero-hint"
+                             class="absolute bottom-6 left-1/2 -translate-x-1/2 bg-black/60 text-white text-sm px-5 py-2.5 rounded-full backdrop-blur-md flex items-center gap-2 pointer-events-none transition-opacity duration-300 opacity-100"
+                             style="transform: translateZ(50px) translateX(-50%);">
+                            <i data-lucide="refresh-cw" class="w-4 h-4 animate-spin" style="animation-duration: 3s;"></i>
+                            Geser 360° (Sentuh & Putar)
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Floating Badges -->
+                <div class="absolute top-10 -left-6 md:-left-12 bg-white p-4 rounded-2xl shadow-xl border border-slate-100 animate-bounce" style="animation-duration: 3s;">
+                    <div class="flex items-center gap-3">
+                        <div class="bg-amber-100 p-2 rounded-full text-amber-500"><i data-lucide="star" fill="currentColor" class="w-6 h-6"></i></div>
+                        <div>
+                            <p class="font-bold text-slate-800">Rating 4.9/5</p>
+                            <p class="text-xs text-slate-500">Dari Orang Tua</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="absolute bottom-10 -right-6 md:-right-4 bg-white p-4 rounded-2xl shadow-xl border border-slate-100 animate-bounce" style="animation-duration: 4s;">
+                    <div class="flex items-center gap-3">
+                        <div class="bg-sky-100 p-2 rounded-full text-sky-600"><i data-lucide="award" class="w-6 h-6"></i></div>
+                        <div>
+                            <p class="font-bold text-slate-800">Guru Bersanad</p>
+                            <p class="text-xs text-slate-500">Terpercaya & Ahli</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="keunggulan" class="py-16 bg-white">
+        <div class="container mx-auto px-6 md:px-12">
+            <div class="bg-emerald-600 rounded-[2.5rem] p-8 md:p-12 shadow-2xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-emerald-500 rounded-full mix-blend-screen filter blur-3xl opacity-50 translate-x-1/2 -translate-y-1/2"></div>
+                
+                <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-10">
+                    <div class="md:w-1/3 text-white">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-4">Mengapa Memilih Qolby Quran?</h2>
+                        <p class="text-emerald-50 mb-6">Kami berkomitmen memberikan pengalaman belajar membaca Al-Qur'an terbaik untuk Anda dan keluarga.</p>
+                    </div>
+                    <div class="md:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <!-- Advantage 1 -->
+                        <div class="bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-2xl flex items-center gap-4 text-white hover:bg-white/20 transition-colors">
+                            <div class="bg-white p-2 rounded-xl shadow-sm text-amber-500">
+                                <i data-lucide="award" class="w-6 h-6"></i>
+                            </div>
+                            <span class="font-semibold">Guru Berpengalaman & Bersanad</span>
+                        </div>
+                        <!-- Advantage 2 -->
+                        <div class="bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-2xl flex items-center gap-4 text-white hover:bg-white/20 transition-colors">
+                            <div class="bg-white p-2 rounded-xl shadow-sm text-amber-500">
+                                <i data-lucide="smile" class="w-6 h-6"></i>
+                            </div>
+                            <span class="font-semibold">Metode Belajar Menyenangkan</span>
+                        </div>
+                        <!-- Advantage 3 -->
+                        <div class="bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-2xl flex items-center gap-4 text-white hover:bg-white/20 transition-colors">
+                            <div class="bg-white p-2 rounded-xl shadow-sm text-amber-500">
+                                <i data-lucide="file-text" class="w-6 h-6"></i>
+                            </div>
+                            <span class="font-semibold">Laporan Perkembangan Santri</span>
+                        </div>
+                        <!-- Advantage 4 -->
+                        <div class="bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-2xl flex items-center gap-4 text-white hover:bg-white/20 transition-colors">
+                            <div class="bg-white p-2 rounded-xl shadow-sm text-amber-500">
+                                <i data-lucide="calendar" class="w-6 h-6"></i>
+                            </div>
+                            <span class="font-semibold">Jadwal Fleksibel</span>
+                        </div>
+                        <!-- Advantage 5 -->
+                        <div class="bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-2xl flex items-center gap-4 text-white hover:bg-white/20 transition-colors sm:col-span-2 md:col-span-1 lg:col-span-2 xl:col-span-1">
+                            <div class="bg-white p-2 rounded-xl shadow-sm text-amber-500">
+                                <i data-lucide="user-check" class="w-6 h-6"></i>
+                            </div>
+                            <span class="font-semibold">Pembelajaran Personal 1-on-1</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="program" class="py-20 bg-slate-50">
+        <div class="container mx-auto px-6 md:px-12">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-800 mb-4">Program Unggulan Kami</h2>
+                <p class="text-slate-600 text-lg">Pilih metode dan program belajar yang paling sesuai dengan kebutuhan Anda atau buah hati tercinta.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Program 1 -->
+                <div class="bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl border border-slate-100 transition-all duration-300 transform hover:-translate-y-2 group">
+                    <div class="w-16 h-16 bg-sky-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-emerald-50 group-hover:scale-110 transition-all duration-300 text-emerald-600">
+                        <i data-lucide="home" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">Mengaji Privat ke Rumah</h3>
+                    <p class="text-slate-600 leading-relaxed">Guru datang ke rumah Anda. Nyaman, aman, dan hemat waktu.</p>
+                </div>
+                <!-- Program 2 -->
+                <div class="bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl border border-slate-100 transition-all duration-300 transform hover:-translate-y-2 group">
+                    <div class="w-16 h-16 bg-sky-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-emerald-50 group-hover:scale-110 transition-all duration-300 text-emerald-600">
+                        <i data-lucide="video" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">Mengaji Online</h3>
+                    <p class="text-slate-600 leading-relaxed">Via Zoom/Google Meet. Belajar dari mana saja dengan interaktif.</p>
+                </div>
+                <!-- Program 3 -->
+                <div class="bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl border border-slate-100 transition-all duration-300 transform hover:-translate-y-2 group">
+                    <div class="w-16 h-16 bg-sky-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-emerald-50 group-hover:scale-110 transition-all duration-300 text-emerald-600">
+                        <i data-lucide="book-open" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">Tahsin Al-Qur'an</h3>
+                    <p class="text-slate-600 leading-relaxed">Perbaikan bacaan sesuai tajwid dan makharijul huruf yang benar.</p>
+                </div>
+                <!-- Program 4 -->
+                <div class="bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl border border-slate-100 transition-all duration-300 transform hover:-translate-y-2 group">
+                    <div class="w-16 h-16 bg-sky-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-emerald-50 group-hover:scale-110 transition-all duration-300 text-emerald-600">
+                        <i data-lucide="heart" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">Tahfidz Al-Qur'an</h3>
+                    <p class="text-slate-600 leading-relaxed">Program hafalan dengan metode mutqin dan menyenangkan.</p>
+                </div>
+                <!-- Program 5 -->
+                <div class="bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl border border-slate-100 transition-all duration-300 transform hover:-translate-y-2 group">
+                    <div class="w-16 h-16 bg-sky-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-emerald-50 group-hover:scale-110 transition-all duration-300 text-emerald-600">
+                        <i data-lucide="star" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">Belajar Iqra dari Nol</h3>
+                    <p class="text-slate-600 leading-relaxed">Pengenalan huruf hijaiyah hingga lancar membaca Al-Qur'an.</p>
+                </div>
+                <!-- Program 6 -->
+                <div class="bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl border border-slate-100 transition-all duration-300 transform hover:-translate-y-2 group">
+                    <div class="w-16 h-16 bg-sky-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-emerald-50 group-hover:scale-110 transition-all duration-300 text-emerald-600">
+                        <i data-lucide="smile" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">Program Anak Usia Dini</h3>
+                    <p class="text-slate-600 leading-relaxed">Pendekatan story-telling dan games edukatif yang seru.</p>
+                </div>
+            </div>
+
+            <div class="mt-16 text-center">
+                <p class="text-slate-500 mb-6">Tersedia jadwal yang fleksibel untuk semua program.</p>
+                <a href="#kontak" class="inline-flex items-center gap-2 text-emerald-600 font-bold hover:text-emerald-700">
+                    Lihat Detail Pendaftaran <i data-lucide="chevron-down" class="w-5 h-5 animate-bounce"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6 md:px-12">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-800 mb-4">Galeri Kegiatan Belajar</h2>
+                <p class="text-slate-600 text-lg">Momen antusiasme dan kebahagiaan para santri saat belajar Al-Qur'an.</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="aspect-square rounded-2xl bg-slate-100 relative overflow-hidden group shadow-sm hover:shadow-md transition-all">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiT9h2-k_vkdWjduE5Dru5tNpeqvbCxLtkQ3WJvuqy88ow3LSVr9MptG4FMELwLGxWAD4bTFqZN_GnTDBTYrAMVC8T6Lk64Zj3HHlXIv8FpNP4-ta4cihTmmMIw8NGLfLkLVzmp4D42RdCDYwkh5p_m3IX8yTAiHy6Opsl4zQKpkwmA10yFUfQbYXWqaow/s1280/WhatsApp%20Image%202026-06-22%20at%2014.04.56.jpeg" alt="Kegiatan Belajar Mengaji 1" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"/>
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end p-4">
+                        <div class="text-white font-medium translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Kegiatan Belajar Mengaji 1</div>
+                    </div>
+                </div>
+                <div class="aspect-square rounded-2xl bg-slate-100 relative overflow-hidden group shadow-sm hover:shadow-md transition-all">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjFmZSqPtv_UUCxLqNUzQR6s_dlHXyg5oyKVfsvnEHtM5wmTKwX5DT0C-7E5vcAOk0IRPV2ag-DcxERAhZq2U6WcELqUsab6Wn-8-40R5scWaBlFEHUAihrCmGTKKbI21pIn2gwm9ah_RdsT4TdLhyphenhyphenLIp-RhosGJ89oCEZNsXePmHXDhEzGIT6tc-Ikxig/s1280/WhatsApp%20Image%202026-06-22%20at%2014.03.14.jpeg" alt="Kegiatan Belajar Mengaji 2" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"/>
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end p-4">
+                        <div class="text-white font-medium translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Kegiatan Belajar Mengaji 2</div>
+                    </div>
+                </div>
+                <div class="aspect-square rounded-2xl bg-slate-100 relative overflow-hidden group shadow-sm hover:shadow-md transition-all">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgt0Awsg4mCdtnbnBzJ2o98fmkcjN2-YHJE1AP-pML0faDMiRq9bW7sSb2wYEC2iIWorVdYIkerjwXS5fpgUxbVIRv9qDIFubZ_rWWewPHHMYaMziDFIGj6FJ9AEMlleylzPTuuszODL-ktIP8vat6adxxc6mYMG70tXzSjMJ1eFVbe-6BDxLWKIYvdLhM/s1528/WhatsApp%20Image%202026-06-22%20at%2013.57.14%20%281%29.jpeg" alt="Kegiatan Belajar Mengaji 3" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"/>
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end p-4">
+                        <div class="text-white font-medium translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Kegiatan Belajar Mengaji 3</div>
+                    </div>
+                </div>
+                <div class="aspect-square rounded-2xl bg-slate-100 relative overflow-hidden group shadow-sm hover:shadow-md transition-all">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiIuhUTNiZhXsUDLCdz4acvxCMjMNk0XK4TIxXIlCjETey5EBPLum8jCr9_oBuwhZIaZOD3-tw1L1nPFojDefVKXNiB-aPEiB-PkRSTwiyWV-ICfJDghQcNXyEMr1LOCYQHPtBhzbIjq2O7cbdwLBG2KzXcXEIWj19Lfewd_SD_sDA_5bG873qICgBoxZA/s1528/WhatsApp%20Image%202026-06-22%20at%2013.57.14.jpeg" alt="Kegiatan Belajar Mengaji 4" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"/>
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end p-4">
+                        <div class="text-white font-medium translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Kegiatan Belajar Mengaji 4</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimoni" class="py-20 bg-sky-50">
+        <div class="container mx-auto px-6 md:px-12">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-800 mb-4">Apa Kata Mereka?</h2>
+                <p class="text-slate-600 text-lg">Testimoni dari orang tua santri dan peserta dewasa.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimoni 1 -->
+                <div class="bg-white p-8 rounded-[2rem] shadow-sm relative">
+                    <div class="absolute top-8 right-8 text-sky-100">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14.017 21L16.41 14.9C16.955 13.565 17.227 12.18 17.227 10.745V3H23V10.745C23 13.385 22.409 15.825 21.227 18.065C20.045 20.305 18.272 21.84 15.909 22.67L14.017 21ZM3.017 21L5.41 14.9C5.955 13.565 6.227 12.18 6.227 10.745V3H12V10.745C12 13.385 11.409 15.825 10.227 18.065C9.045 20.305 7.272 21.84 4.909 22.67L3.017 21Z" />
+                        </svg>
+                    </div>
+                    <div class="flex text-amber-400 mb-6">
+                        <i data-lucide="star" fill="currentColor" class="w-5 h-5"></i>
+                        <i data-lucide="star" fill="currentColor" class="w-5 h-5"></i>
+                        <i data-lucide="star" fill="currentColor" class="w-5 h-5"></i>
+                        <i data-lucide="star" fill="currentColor" class="w-5 h-5"></i>
+                        <i data-lucide="star" fill="currentColor" class="w-5 h-5"></i>
+                    </div>
+                    <p class="text-slate-600 mb-8 relative z-10 italic">"Alhamdulillah sejak ikut Qolby Quran, anak saya jadi semangat mengaji. Gurunya sabar banget dan metodenya gak bikin bosen."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-700 font-bold">B</div>
+                        <div>
+                            <h4 class="font-bold text-slate-800">Bunda Aisha</h4>
+                            <p class="text-sm text-slate-500">Orang Tua Santri</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Testimoni 2 -->
+                <div class="bg-white p-8 rounded-[2rem] shadow-sm relative">
+                    <div class="absolute top-8 right-8 text-sky-100">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14.017 21L16.41 14.9C16.955 13.565 17.227 12.18 17.227 10.745V3H23V10.745C23 13.385 22.409 15.825 21.227 18.065C20.045 20.305 18.272 21.84 15.909 22.67L14.017 21ZM3.017 21L5.41 14.9C5.955 13.565 6.227 12.18 6.227 10.745V3H12V10.745C12 13.385 11.409 15.825 10.227 18.065C9.045 20.305 7.272 21.84 4.909 22.67L3.017 21Z" />
+                        </svg>
+                    </div>
+                    <div class="flex text-amber-400 mb-6">
+                        <i data-lucide="star" fill="currentColor" class="w-5 h-5"></i>
+                        <i data-lucide="star" fill="currentColor" class="w-5 h-5"></i>
+                        <i data-lucide="star" fill="currentColor" class="w-5 h-5"></i>
+                        <i data-lucide="star" fill="currentColor" class="w-5 h-5"></i>
+                        <i data-lucide="star" fill="currentColor" class="w-5 h-5"></i>
+                    </div>
+                    <p class="text-slate-600 mb-8 relative z-10 italic">"Sangat membantu untuk saya yang baru mulai belajar tahsin dari nol di usia dewasa. Jadwalnya bisa disesuaikan dengan jam kerja."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-700 font-bold">B</div>
+                        <div>
+                            <h4 class="font-bold text-slate-800">Bapak Rizky</h4>
+                            <p class="text-sm text-slate-500">Peserta Dewasa</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Testimoni 3 -->
+                <div class="bg-white p-8 rounded-[2rem] shadow-sm relative">
+                    <div class="absolute top-8 right-8 text-sky-100">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14.017 21L16.41 14.9C16.955 13.565 17.227 12.18 17.227 10.745V3H23V10.745C23 13.385 22.409 15.825 21.227 18.065C20.045 20.305 18.272 21.84 15.909 22.67L14.017 21ZM3.017 21L5.41 14.9C5.955 13.565 6.227 12.18 6.227 10.745V3H12V10.745C12 13.385 11.409 15.825 10.227 18.065C9.045 20.305 7.272 21.84 4.909 22.67L3.017 21Z" />
+                        </svg>
+                    </div>
+                    <div class="flex text-amber-400 mb-6">
+                        <i data-lucide="star" fill="currentColor" class="w-5 h-5"></i>
+                        <i data-lucide="star" fill="currentColor" class="w-5 h-5"></i>
+                        <i data-lucide="star" fill="currentColor" class="w-5 h-5"></i>
+                        <i data-lucide="star" fill="currentColor" class="w-5 h-5"></i>
+                        <i data-lucide="star" fill="currentColor" class="w-5 h-5"></i>
+                    </div>
+                    <p class="text-slate-600 mb-8 relative z-10 italic">"Laporan perkembangannya sangat detail. Saya jadi tau progress hafalan anak saya setiap bulannya. Recommended!"</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-700 font-bold">I</div>
+                        <div>
+                            <h4 class="font-bold text-slate-800">Ibu Fatimah</h4>
+                            <p class="text-sm text-slate-500">Orang Tua Santri</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6 md:px-12 max-w-4xl">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-800 mb-4">Pertanyaan Seputar Qolby Quran</h2>
+            </div>
+
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="border border-slate-200 rounded-2xl overflow-hidden transition-all duration-300 bg-white">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center hover:bg-slate-50 font-semibold text-slate-800 focus:outline-none">
+                        <span>Apakah bisa pilih jadwal mengaji?</span>
+                        <i data-lucide="chevron-down" class="text-slate-400 w-5 h-5 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content px-6 text-slate-600">
+                        <p>Tentu! Anda bisa menentukan jadwal mengaji sesuai dengan ketersediaan waktu Anda dan akan kami sesuaikan dengan jadwal guru.</p>
+                    </div>
+                </div>
+                <!-- FAQ Item 2 -->
+                <div class="border border-slate-200 rounded-2xl overflow-hidden transition-all duration-300 bg-white">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center hover:bg-slate-50 font-semibold text-slate-800 focus:outline-none">
+                        <span>Berapa durasi satu kali pertemuan?</span>
+                        <i data-lucide="chevron-down" class="text-slate-400 w-5 h-5 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content px-6 text-slate-600">
+                        <p>Standar durasi satu kali pertemuan adalah 60 hingga 90 menit, tergantung program yang diambil.</p>
+                    </div>
+                </div>
+                <!-- FAQ Item 3 -->
+                <div class="border border-slate-200 rounded-2xl overflow-hidden transition-all duration-300 bg-white">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center hover:bg-slate-50 font-semibold text-slate-800 focus:outline-none">
+                        <span>Apakah gurunya laki-laki atau perempuan?</span>
+                        <i data-lucide="chevron-down" class="text-slate-400 w-5 h-5 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content px-6 text-slate-600">
+                        <p>Kami menyediakan guru laki-laki (Ustadz) untuk santri laki-laki dan guru perempuan (Ustadzah) untuk santri perempuan.</p>
+                    </div>
+                </div>
+                <!-- FAQ Item 4 -->
+                <div class="border border-slate-200 rounded-2xl overflow-hidden transition-all duration-300 bg-white">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center hover:bg-slate-50 font-semibold text-slate-800 focus:outline-none">
+                        <span>Bagaimana sistem pembayarannya?</span>
+                        <i data-lucide="chevron-down" class="text-slate-400 w-5 h-5 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content px-6 text-slate-600">
+                        <p>Pembayaran dilakukan di awal bulan (bulanan) melalui transfer bank setelah Anda menyepakati paket belajar yang dipilih.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="kontak" class="bg-emerald-900 pt-20 pb-10 rounded-t-[3rem] mt-10">
+        <div class="container mx-auto px-6 md:px-12">
+            <!-- CTA Box -->
+            <div class="bg-gradient-to-r from-emerald-600 to-emerald-500 rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden -mt-32 mb-16 text-center text-white max-w-5xl mx-auto">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-emerald-400 rounded-full mix-blend-screen filter blur-3xl opacity-50 translate-x-1/3 -translate-y-1/3"></div>
+                <div class="relative z-10">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Mulai Perjalanan Belajar Al-Qur'an Anda</h2>
+                    <p class="text-emerald-50 mb-8 text-lg max-w-2xl mx-auto">Daftar sekarang untuk mendapatkan sesi konsultasi gratis dan penempatan kelas yang sesuai.</p>
+                    <a href="https://wa.me/qr/4RUWVO4IFCOEE1" target="_blank" rel="noreferrer" class="inline-flex items-center gap-2 px-8 py-4 bg-amber-400 hover:bg-amber-500 text-amber-950 rounded-full font-bold text-lg transition-all shadow-lg transform hover:-translate-y-1">
+                        <i data-lucide="phone" class="w-6 h-6"></i> Hubungi Admin via WhatsApp
+                    </a>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 text-emerald-100 mb-12">
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhmQNbqqIFjOYD5MXIjWljwfWxLQKYCYG9eWMKXiRJbdkFJluv5Txu3sdfHYZ-qXlZ1Flu6ci0cqtPv7v7FxJJotFuP8wF_C43zZxLdzVp3nqEHh18ApNBMkMSlaI9r7TVK0KWEMiDuvYiFYffd61Mjf-fM2VbVKQG8mnuAXsYJOogen6eEvs06HDFGyZI/s1391/WhatsApp%20Image%202026-06-22%20at%2014.22.16.jpeg" alt="Qolby Quran Logo" class="h-16 rounded-xl object-contain bg-white" />
+                        <div class="flex flex-col justify-center">
+                            <span class="text-2xl font-extrabold text-white leading-none">Qolby Quran</span>
+                            <span class="text-xs font-bold tracking-widest text-amber-400 uppercase mt-1">Mengaji</span>
+                        </div>
+                    </div>
+                    <p class="mb-6 opacity-80 leading-relaxed">
+                        Lembaga pendidikan Al-Qur'an profesional yang berdedikasi menciptakan generasi Qur'ani dengan metode yang mudah, nyaman, dan menyenangkan.
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-6">Tautan Cepat</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#beranda" class="hover:text-white transition-colors">Beranda</a></li>
+                        <li><a href="#program" class="hover:text-white transition-colors">Program Belajar</a></li>
+                        <li><a href="#keunggulan" class="hover:text-white transition-colors">Keunggulan Kami</a></li>
+                        <li><a href="#testimoni" class="hover:text-white transition-colors">Testimoni</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-6">Program</h3>
+                    <ul class="space-y-3">
+                        <li><span class="opacity-80">Mengaji Privat Rumah</span></li>
+                        <li><span class="opacity-80">Mengaji Online</span></li>
+                        <li><span class="opacity-80">Tahsin & Tahfidz</span></li>
+                        <li><span class="opacity-80">Kelas Dewasa & Anak</span></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-6">Hubungi Kami</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="phone" class="w-5 h-5 text-amber-400 shrink-0"></i>
+                            <span class="opacity-80">+62 818-0948-3560</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="mail" class="w-5 h-5 text-amber-400 shrink-0"></i>
+                            <span class="opacity-80">haloqolbyquran@gmail.com</span>
+                        </li>
+                    </ul>
+                    <div class="mt-6 flex gap-4">
+                        <a href="https://www.instagram.com/qolbyquran?igsh=dzBxZ2ZzcXlucXFv" target="_blank" rel="noreferrer" class="w-10 h-10 bg-emerald-800 rounded-full flex items-center justify-center hover:bg-emerald-700 transition-colors text-white" aria-label="Instagram">
+                            <!-- Menggunakan SVG Murni agar icon selalu muncul -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-emerald-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-emerald-300/60">
+                <p>&copy; 2026 Qolby Quran. Hak Cipta Dilindungi.</p>
+                <p>Didesain dengan <i data-lucide="heart" fill="currentColor" class="w-4 h-4 inline text-rose-400 mx-1"></i> untuk Generasi Qur'ani</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Initialize Scripts -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // 1. Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                navbar.classList.add('bg-white', 'shadow-md', 'py-3');
+                navbar.classList.remove('bg-transparent', 'py-5');
+            } else {
+                navbar.classList.add('bg-transparent', 'py-5');
+                navbar.classList.remove('bg-white', 'shadow-md', 'py-3');
+            }
+        });
+
+        // 2. Mobile Menu Toggle
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        let isMenuOpen = false;
+
+        function toggleMenu() {
+            isMenuOpen = !isMenuOpen;
+            if(isMenuOpen) {
+                mobileMenu.classList.add('open');
+                menuBtn.innerHTML = '<i data-lucide="x" class="w-7 h-7"></i>';
+            } else {
+                mobileMenu.classList.remove('open');
+                menuBtn.innerHTML = '<i data-lucide="menu" class="w-7 h-7"></i>';
+            }
+            lucide.createIcons(); // Re-render icon
+        }
+
+        menuBtn.addEventListener('click', toggleMenu);
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if(isMenuOpen) toggleMenu();
+            });
+        });
+
+        // 3. FAQ Accordion Logic
+        const faqButtons = document.querySelectorAll('.faq-btn');
+        faqButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const content = btn.nextElementSibling;
+                const icon = btn.querySelector('i');
+                const isOpen = content.classList.contains('open');
+
+                // Close all other FAQs
+                document.querySelectorAll('.faq-content').forEach(el => el.classList.remove('open'));
+                document.querySelectorAll('.faq-btn i').forEach(el => {
+                    el.classList.remove('rotate-180', 'text-emerald-600');
+                    el.classList.add('text-slate-400');
+                });
+
+                // Toggle current FAQ
+                if (!isOpen) {
+                    content.classList.add('open');
+                    icon.classList.add('rotate-180', 'text-emerald-600');
+                    icon.classList.remove('text-slate-400');
+                }
+            });
+        });
+
+        // 4. 3D Drag Effect Logic (Vanilla JS)
+        const hero3d = document.getElementById('hero-3d');
+        const hintText = document.getElementById('hero-hint');
+        let isDragging = false;
+        let startX = 0, startY = 0;
+        let rotationX = 0, rotationY = 0;
+
+        const startDrag = (e) => {
+            isDragging = true;
+            hero3d.style.transition = 'none';
+            hero3d.style.boxShadow = '0 30px 60px rgba(0,0,0,0.2)';
+            hero3d.style.cursor = 'grabbing';
+            hintText.classList.replace('opacity-100', 'opacity-0');
+            
+            startX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+            startY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
+        };
+
+        const moveDrag = (e) => {
+            if (!isDragging) return;
+            const clientX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+            const clientY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
+
+            const deltaX = clientX - startX;
+            const deltaY = clientY - startY;
+
+            rotationY += deltaX * 0.6;
+            rotationX -= deltaY * 0.6;
+
+            hero3d.style.transform = `rotateX(${rotationX}deg) rotateY(${rotationY}deg)`;
+
+            startX = clientX;
+            startY = clientY;
+        };
+
+        const endDrag = () => {
+            if(!isDragging) return;
+            isDragging = false;
+            hero3d.style.transition = 'transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1)';
+            hero3d.style.boxShadow = '0 20px 40px rgba(0,0,0,0.1)';
+            hero3d.style.cursor = 'grab';
+            hintText.classList.replace('opacity-0', 'opacity-100');
+        };
+
+        // Mouse Events
+        hero3d.addEventListener('mousedown', startDrag);
+        window.addEventListener('mousemove', moveDrag);
+        window.addEventListener('mouseup', endDrag);
+        
+        // Touch Events for Mobile
+        hero3d.addEventListener('touchstart', startDrag, {passive: true});
+        window.addEventListener('touchmove', moveDrag, {passive: true});
+        window.addEventListener('touchend', endDrag);
+    </script>
+</body>
+</html>
